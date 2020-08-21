@@ -3,15 +3,10 @@ const scene = new THREE.Scene();
 const aspectRatio = window.innerWidth / window.innerHeight;
 const camera = new THREE.PerspectiveCamera(60, aspectRatio, 50, 10000);
 
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// Creating a cube 
-var geometry = new THREE.BoxBufferGeometry(50, 50, 50);
-var material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
-var mesh = new THREE.Mesh(geometry, material);
-scene.add(mesh);
 
 // Loading images for skybox texture 
 const loader = new THREE.CubeTextureLoader();
@@ -30,12 +25,31 @@ const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.target.set(0, 30, 100);
 controls.update();
 
+//Loading the gltf file 
+
+var modelloader = new THREE.GLTFLoader();
+
+modelloader.load('./RX07.glb', function(gltf) {
+
+    var model = gltf.scene;
+
+    model.scale.set(3, 3, 3);
+
+    scene.add(model);
+
+}, undefined, function(error) {
+
+    console.error(error);
+
+});
 
 var renderScene = function() {
     requestAnimationFrame(renderScene);
 
     controls.update();
 
+    mesh1.rotation.x += 0.05;
+    mesh2.rotation.x -= 0.05;
     renderer.render(scene, camera);
 };
 
