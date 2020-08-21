@@ -47,7 +47,6 @@ var renderScene = function() {
     requestAnimationFrame(renderScene);
 
     controls.update();
-
     renderer.render(scene, camera);
 };
 
