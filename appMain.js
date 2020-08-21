@@ -48,8 +48,6 @@ var renderScene = function() {
 
     controls.update();
 
-    mesh1.rotation.x += 0.05;
-    mesh2.rotation.x -= 0.05;
     renderer.render(scene, camera);
 };
 
