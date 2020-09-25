@@ -1,2 +1,2 @@
 # LostWorld
-a scene using orbit controls in three.js
+A simple VR world , with orbit controls created using three js.
